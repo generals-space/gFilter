@@ -1,0 +1,9 @@
+input,
+select,
+textarea,
+button
+{
+    border-width: 0.5px !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}

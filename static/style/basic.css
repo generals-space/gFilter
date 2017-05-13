@@ -1,0 +1,9 @@
+.rule-table-navbar{
+    height: 50px;
+    line-height: 48px;
+}
+
+.rule-table-wrapper{
+    position: relative;
+    top: 80px;
+}

@@ -1,0 +1,37 @@
+{
+    "manifest_version": 2,
+    "name": "gFilter",
+    "version": "1.0.3",
+    "description": "阻止浏览器加载指定模式的资源",
+    // chrome://extensions页面展示的扩展图标
+    "icons": {
+        "16": "static/img/icon.png",
+        "32": "static/img/icon.png",
+        "48": "static/img/icon.png",
+        "64": "static/img/icon.png",
+        "128": "static/img/icon.png"
+    },
+    "browser_action": {
+        // 显示在地址栏上的图标
+        "default_icon": "static/img/icon.png",
+        "default_popup": "popup.html",
+        // 鼠标悬停在icon上显示的提示, 有点像html中多数元素的title属性
+        "default_title": "gFilter"
+    },
+    "background": {
+        // "scripts": [
+        //     "background.js"
+        // ]
+        "page": "background.html"
+    },
+    /*options_page会在扩展图标的右键菜单上添加"选项"的选项...*/
+    "options_page": "options.html",
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "permissions": [
+    //    "*://*/",
+        "clipboardRead",
+        "<all_urls>",
+        "webRequest",
+        "webRequestBlocking"
+    ]
+}
