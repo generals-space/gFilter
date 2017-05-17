@@ -38,4 +38,4 @@ gFilter提供`导入/导出`功能, 所需格式相同, 如下
 
 ![](res/src/004.png)
 
-该扩展源码目录中已经包含了整理出来的规则列表 [点这里]()
+该扩展源码目录中已经包含了整理出来的规则列表 [点这里](https://github.com/generals-space/gFilter/blob/master/ruleList.txt)
