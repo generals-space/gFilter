@@ -42,6 +42,8 @@ var url_rules = [
 ]
 ruleListHandler = new RuleList();
 var block_rules = ruleListHandler.export();
+if(!block_rules || block_rules == '') 
+    block_rules = ['http://j/k/i'];
 // 监听发送请求
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {

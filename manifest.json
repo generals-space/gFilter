@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "gFilter",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "阻止浏览器加载指定模式的资源",
     // chrome://extensions页面展示的扩展图标
     "icons": {
