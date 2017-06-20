@@ -1,5 +1,9 @@
 chrome版本: 53.0.2785.143
 
+参考文章
+
+1. [关于chrome插件编写的小结](http://www.cnblogs.com/meteoric_cry/p/3574457.html)
+
 ## 1. mainfest.json
 
 参考链接
@@ -33,3 +37,15 @@ chrome版本: 53.0.2785.143
 
 `art-template.js`应该是需要将模板文件加载入当前dom才可以进行渲染的, 所以无法通过src从模板文件内引入, 也是没办法的事.
 
+```
+.
+├── anaconda-ks.cfg
+├── skycmdb
+│   ├── BaseObjects.py
+│   ├── business
+│   │   ├── feedback.py
+│   │   ├── idc
+│   │   │   ├── spare_idc.py
+│   │   │   └── spare_idc.pyc
+│   │   ├── info
+```

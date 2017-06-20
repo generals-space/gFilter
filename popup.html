@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>gFilter popup</title>
+    <link rel="stylesheet" href="static/style/bootstrap.css">
+    <link rel="stylesheet" href="static/style/bootstrap-theme.css">
+    <link rel="stylesheet" href="static/style/awesome-bootstrap-checkbox.css">
+    <link rel="stylesheet" href="static/style/font-awesome.css">
+    <link rel="stylesheet" href="static/style/basic.css">
+    <link rel="stylesheet" href="static/style/popup.css">
+</head>
+<body>
+    <header>
+        <h4 class="title">
+            gFilter为您拦截
+            <span id="blocked-sum">0</span>
+            个无用脚本
+        </h4>
+        <hr/>        
+    </header>
+    <section>
+        <ul class="blocked-list">
+
+        </ul>
+        <div class="fixed-bottom" role="group" aria-label="...">
+            <button id="" type="button" class="btn btn-primary btn-block">
+                临时允许
+            </button>
+            <button id="" type="button" class="btn btn-danger btn-block">
+                解除阻止
+            </button>
+        </div>
+    </section>
+
+    <script type="text/html" id="tpl-blockedItem">
+        <!--循环填充规则列表-->
+        {{if blockedListLen != 0}} 
+            {{each blockedList val key}}
+                <li class="checkbox checkbox-primary blocked-item">
+                    <input id="blocked-item-{{key + 1}}" type="checkbox">
+                    <label for="blocked-item-{{key + 1}}">
+                        <span class="blocked-link seperate-text" title="{{val}}">{{val}}</span>
+                    </label>
+                </li>
+            {{/each}} 
+        {{else}}
+            <li class="blocked-item blocked-empty">
+                这个网站很规矩哦~
+            </li>
+        {{/if}}
+    </script>
+
+    <script type="text/javascript" src="static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap.js"></script>
+    <script type="text/javascript" src="static/js/artTemplate-web-4.9.1.js"></script>
+    <script type="text/javascript" src="static/js/popup.js"></script>
+</body>
+</html> 

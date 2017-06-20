@@ -28,3 +28,12 @@
 *://id.jiathis.com/*
 *://td.xue163.com/ajs/newjs/*
 *://*.cnzz.com/*
+*://bdjs.jb51.net/*
+*://pv.mp.sohu.com/*
+*://life.sohu.com/*
+*://pv.sohu.com/*
+*://*.wrating.com/*
+*://internalapi.csdn.net/*
+*://recdm.csdn.net/*
+*://medal.blog.csdn.net/*
+*://zz.bdstatic.com/*

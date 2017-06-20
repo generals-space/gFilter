@@ -18,11 +18,11 @@
         <div class="col-sm-9 col-md-10 main">
             <nav class="navbar navbar-default navbar-fixed-top col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 rule-table-navbar">
                 <div class="btn-group" role="group" aria-label="...">
-                    <button id="btnImportModal" type="button" class="btn btn-default" data-target="#importModal">
+                    <button id="btnImportModal" type="button" class="btn btn-default" data-toggle="modal" data-target="#importModal">
                         导入
                         <span class="glyphicon glyphicon-import" aria-hidden="true"></span>
                     </button>
-                    <button id="btnExportModal" type="button" class="btn btn-default" data-target="#exportModal">
+                    <button id="btnExportModal" type="button" class="btn btn-default" data-toggle="modal" data-target="#exportModal">
                         导出
                         <span class="glyphicon glyphicon-export" aria-hidden="true"></span>
                     </button>
@@ -97,7 +97,8 @@
     </div>
     <script type="text/html" id="tpl-ruleInRow">
         <!--循环填充规则列表-->
-        {{if ruleList}} {{each ruleList val key}}
+        {{if ruleList}} 
+        {{each ruleList val key}}
         <tr class="ruleInRow">
             <td>
                 <select class="form-control ruleSchema">
@@ -138,7 +139,8 @@
                 <button type="button" class="btn btn-danger btnDelRule" title="删除当前规则">删除</button>
             </td>
         </tr>
-        {{/each}} {{else}}
+        {{/each}} 
+        {{else}}
         <tr class="ruleInRow">
             <td>
                 <select class="form-control ruleSchema">

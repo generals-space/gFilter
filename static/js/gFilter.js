@@ -1,34 +1,30 @@
 ;$(document).ready(function(){
-    ruleListHandler = new RuleList();
-    ruleListHandler.render();
+    ruleList = new RuleList();
+    ruleList.render();
     addListener();
 });
 
 
 function addListener(){
-    // 还是有点不明白为什么不能在click里直接写回调函数, 明明ruleListHandler已经实例化了...
-    // console.dir(ruleListHandler);
-    // console.log(ruleListHandler.save);
-    // $('.btnSaveRules').click(ruleListHandler.save);
+    // 还是有点不明白为什么不能在click里直接写回调函数, 明明ruleList已经实例化了...
+    // console.dir(ruleList);
+    // console.log(ruleList.save);
+    // $('.btnSaveRules').click(ruleList.save);
     $('.btnSaveRules').click(function(){
-        ruleListHandler.save();
+        ruleList.save();
     });
-    // $('.btnClearRules').click(ruleListHandler.clear);
+    // $('.btnClearRules').click(ruleList.clear);
     $('.btnClearRules').click(function() {
-        ruleListHandler.clear();
+        ruleList.clear();
     });
     $('.btnAddRules').click(function() {
-        ruleListHandler.add();
+        ruleList.add();
     });
 
-    // 导入导出模态框绑定
-    $('#btnImportModal').click(function() {
-        $('#importModal').modal('show');
-    });
-    $('#btnExportModal').click(function() {
-        var ruleListText = ruleListHandler.export().join('<br/>');
+    // 导入导出模态框行为绑定
+    $('#exportModal').on('show.bs.modal', function(e){
+        var ruleListText = ruleList.export().join('<br/>');
         $('#exportModal').find('.modal-body').html(ruleListText);
-        $('#exportModal').modal('show');
     });
     // 导入模态框关闭回调, 清空文本框内容
     $('#importModal').on('hide.bs.modal', function(e){
@@ -37,8 +33,8 @@ function addListener(){
     // 导入确认操作
     $('.btnImportConfirm').click(function(){
         var ruleStrList = $('#importModal').find('.ruleInText').val().split('\n');
-        ruleListHandler.import(ruleStrList);
+        ruleList.import(ruleStrList);
         // 用导入的规则重新渲染列表
-        ruleListHandler.render();
+        ruleList.render();
     });
 }

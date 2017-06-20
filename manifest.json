@@ -24,6 +24,12 @@
         // ]
         "page": "background.html"
     },
+    "content_scripts": [{
+        "matches": ["http://*/*","https://*/*"],   
+        "js": ["static/js/content.js"],   
+        "run_at": "document_start",  
+        "all_frames": true 
+    }],
     /*options_page会在扩展图标的右键菜单上添加"选项"的选项...*/
     "options_page": "options.html",
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
@@ -32,6 +38,9 @@
         "clipboardRead",
         "<all_urls>",
         "webRequest",
-        "webRequestBlocking"
+        "webRequestBlocking",
+        "tabs",
+        "activeTab",
+        "storage"
     ]
 }

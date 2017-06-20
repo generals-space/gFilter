@@ -1,0 +1,27 @@
+body{
+    /*popup.html有宽高限制*/
+    width: 360px; height: 560px;
+    overflow: scroll;
+    padding: 10px 20px;
+}
+
+.title{
+    text-align: center;
+}
+
+.blocked-list{
+    overflow: hidden;
+    margin-bottom: 100px;
+}
+
+.blocked-empty{
+    text-align: center;
+    font-family: 'Microsoft Yahei';
+}
+
+.fixed-bottom{
+    display: inline-block;
+    width: 96%;
+    left: 2%; right: 2%;
+    bottom: 2%;
+}

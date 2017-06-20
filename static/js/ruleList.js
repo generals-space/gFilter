@@ -3,7 +3,6 @@ function RuleList(){
     self = this;
     self.ruleTable = $('#ruleTable');
     self._ruleList = [];
-
     // 监听器: 删除表格当前行所表示的规则
     self.ruleTable.on('click', '.btnDelRule', function(){
         $(this).parents('.ruleInRow').remove();
@@ -80,12 +79,12 @@ function RuleList(){
     };
 
     /*
-        @function:
-            从DOM文档中得到规则列表对象并返回
+        @function: 从DOM文档中得到规则列表对象并返回
     */
     self.parse = function(){
         var ruleInRows   = self.ruleTable.find('.ruleInRow');
         tmpRuleList = [];
+        // 不只jq对象可以使用each方法, 普通数组对象也可以
         ruleInRows.each(function(){
             var ruleItem = {
                 'schema'    : $(this).find('.ruleSchema').val(),

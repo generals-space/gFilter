@@ -12,6 +12,10 @@ lisence: MIT
 
 `gFilter`可以直接屏蔽网站内嵌的百度推广, 百度推荐, 谷歌数据统计的请求代码, 各种统计平台, 广告平台, 分享平台的数据链接, 缩短网站响应时间, 提高加载速率, 屏蔽多数广告. 
 
+比如下面这种情况, chrome的标签页的小圈圈转啊转了1分钟, 还是个废链接...真的会急死人的.
+
+![](res/src/005.png)
+
 如下示例, gFilter屏蔽了`bdimg.share.baidu.com`与`push.zhanzhang.baidu.com`链接.
 
 ![](res/src/001.png)

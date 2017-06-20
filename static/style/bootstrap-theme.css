@@ -1,9 +1,18 @@
+ul{padding: 0;}
+li {list-style: none;}
 input,
 select,
 textarea,
-button
+button,
+.form-control,
+.input-group-addon
 {
     border-width: 0.5px !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
+}
+
+.container-fluid{
+    padding-left: 0;
+    padding-right: 0;
 }
