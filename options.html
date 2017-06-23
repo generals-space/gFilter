@@ -14,17 +14,24 @@
 <body>
 
     <div class="container-fluid">
-        <header class="col-sm-3 col-md-2 sidenav"></header>
+        <aside class="col-sm-3 col-md-2 sidenav"></aside>
         <div class="col-sm-9 col-md-10 main">
             <nav class="navbar navbar-default navbar-fixed-top col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 rule-table-navbar">
-                <div class="btn-group" role="group" aria-label="...">
+                <div class="btn-group">
+                    <button class="btn btn-default btnSaveRules">保存</button>
+                    <button class="btn btn-default btnAddRules">添加</button>
+                    <button class="btn btn-default btnClearRules">清空</button>
+                </div>
+                <div class="btn-group navbar-right" role="group" aria-label="...">
                     <button id="btnImportModal" type="button" class="btn btn-default" data-toggle="modal" data-target="#importModal">
                         导入
-                        <span class="glyphicon glyphicon-import" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-import" aria-hidden="true">
+                        </span>
                     </button>
                     <button id="btnExportModal" type="button" class="btn btn-default" data-toggle="modal" data-target="#exportModal">
                         导出
-                        <span class="glyphicon glyphicon-export" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-export" aria-hidden="true">
+                        </span>
                     </button>
                 </div>
             </nav>
@@ -41,11 +48,7 @@
                     </thead>
                     <tbody></tbody>
                 </table>
-                <div class="handleBar">
-                    <button class="btn btn-default btnSaveRules">保存</button>
-                    <button class="btn btn-default btnAddRules">添加</button>
-                    <button class="btn btn-default btnClearRules">清空</button>
-                </div>
+
             </section>
         </div>
     </div>
@@ -118,10 +121,10 @@
                     </select>
             </td>
             <td>
-                <input type="txt" class="form-control ruleUrl" value="{{val.url}}">
+                <input type="text" class="form-control ruleUrl" value="{{val.url}}">
             </td>
             <td>
-                <input type="txt" class="form-control ruleUri" placeholder="/*" value="{{val.uri}}">
+                <input type="text" class="form-control ruleUri" placeholder="/*" value="{{val.uri}}">
             </td>
             <td>
                 <select class="form-control ruleStatus">
@@ -135,8 +138,14 @@
                     </select>
             </td>
             <td>
-                <button type="button" class="btn btn-info btnCpRule" data-title="已复制当前规则到剪切板">复制</button>
-                <button type="button" class="btn btn-danger btnDelRule" title="删除当前规则">删除</button>
+                <div class="btn-grp invisible" role="group" aria-label="...">
+                    <button type="button" class="btn btn-info btnCpRule" data-title="已复制当前规则到剪切板">
+                        <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger btnDelRule" title="删除当前规则">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                </div>
             </td>
         </tr>
         {{/each}} 
@@ -150,10 +159,10 @@
                     </select>
             </td>
             <td>
-                <input type="txt" class="form-control ruleUrl">
+                <input type="text" class="form-control ruleUrl">
             </td>
             <td>
-                <input type="txt" class="form-control ruleUri" placeholder="/*">
+                <input type="text" class="form-control ruleUri" placeholder="/*">
             </td>
             <td>
                 <select class="form-control ruleStatus">
@@ -162,8 +171,14 @@
                     </select>
             </td>
             <td>
-                <button type="button" class="btn btn-info btnCpRule" data-title="已复制当前规则到剪切板">复制</button>
-                <button type="button" class="btn btn-danger btnDelRule" title="删除当前规则">删除</button>
+                <div class="btn-group hidden" role="group" aria-label="...">
+                    <button type="button" class="btn btn-info btnCpRule" data-title="已复制当前规则到剪切板">
+                        复制
+                    </button>
+                    <button type="button" class="btn btn-danger btnDelRule" title="删除当前规则">
+                        删除
+                    </button>
+                </div>
             </td>
         </tr>
         {{/if}}

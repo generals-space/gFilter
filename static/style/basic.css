@@ -61,36 +61,22 @@ html:hover {overflow: scroll;}
   background-color:rgba(0,0,0,0);
 }
 
-h1, h2, h3, h4, h5, h6, p, a, span{
-    font-family: 'Microsoft Yahei';
-}
-/*
-    如果当前文本超过指定宽度, 就用...代替
-*/
-.seperate-text{
-    display: inline-block;
-    width: 95%;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap; 
-}
-
 .rule-table-navbar{
-    height: 50px;
-    line-height: 48px;
+    padding: 10px;
 }
-
+.navbar .btn-group.navbar-right{
+    margin-right: 0;
+}
 .rule-table-wrapper{
     position: relative;
     top: 80px;
 }
 
-.fixed-top{
-    position: fixed;
-    top: 0;
+#importModal .modal-dialog,
+#exportModal .modal-dialog{
+    width: 360px;
 }
-
-.fixed-bottom{
-    position: fixed;
-    bottom: 0;
+#exportModal .modal-body{
+    height: 540px;
+    overflow-y: scroll;
 }

@@ -12,7 +12,35 @@ button,
     box-shadow: none !important;
 }
 
+h1, h2, h3, h4, h5, h6, p, a, span, button{
+    font-family: 'Microsoft Yahei';
+}
+/*
+    如果当前文本超过指定宽度, 就用...代替
+*/
+.seperate-text{
+    display: inline-block;
+    width: 95%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap; 
+}
+
 .container-fluid{
     padding-left: 0;
     padding-right: 0;
+}
+
+.fixed-top{
+    position: fixed;
+    top: 0;
+}
+
+.fixed-bottom{
+    position: fixed;
+    bottom: 0;
+}
+
+.invisible{
+    visibility: hidden;
 }

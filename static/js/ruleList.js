@@ -24,6 +24,12 @@ function RuleList(){
         */
         $(this).tooltip('destroy');
     });
+    self.ruleTable.on('mouseenter', '.ruleInRow', function(event){
+        $(this).find('.btn-grp').removeClass('invisible');
+    });
+    self.ruleTable.on('mouseleave', '.ruleInRow', function(event){
+        $(this).find('.btn-grp').addClass('invisible');
+    });
     /*
         @function: 将从html的规则列表取出来的字典对象, 
             转换成有效的字符串类型变量(主要是指把select标签中的value转换成字符串)
