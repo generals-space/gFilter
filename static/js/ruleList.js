@@ -25,10 +25,10 @@ function RuleList(){
         $(this).tooltip('destroy');
     });
     self.ruleTable.on('mouseenter', '.ruleInRow', function(event){
-        $(this).find('.btn-grp').removeClass('invisible');
+        $(this).find('.btn-handle-group').removeClass('invisible');
     });
     self.ruleTable.on('mouseleave', '.ruleInRow', function(event){
-        $(this).find('.btn-grp').addClass('invisible');
+        $(this).find('.btn-handle-group').addClass('invisible');
     });
     /*
         @function: 将从html的规则列表取出来的字典对象, 
@@ -152,21 +152,24 @@ function RuleList(){
             只能通过DOM文档中的'保存'功能被调用.
     */
     self.save = function(){
+        var bgField = chrome.extension.getBackgroundPage();
         tmpRuleList = JSON.stringify(self.parse());
         localStorage.ruleList = tmpRuleList;
         self._ruleList = tmpRuleList;
+        bgField.applyRules();
     };
 
     /*
         function: 将self._ruleList格式化成chrome可识别的数组模式.
+        return: []类型数组
     */
     self.export = function(){
         tmpRuleList = [];
         for(var index in self._ruleList){
             var ruleItem = self._ruleList[index];
             var ruleStr = self.convertToStr(ruleItem);
-            
-            tmpRuleList.push(ruleStr);
+            if(ruleStr != '')
+                tmpRuleList.push(ruleStr);
         }
 
         return tmpRuleList;
@@ -175,7 +178,7 @@ function RuleList(){
     /*
         function: 
             导入字符串形式的规则列表, 赋值给self._ruleList
-        @ruleStrList示例: 
+        ruleStrList示例: 
             *://cpro.baidu.com/*
             *://hm.baidu.com/*
             *://*.cnzz.com/*

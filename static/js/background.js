@@ -1,10 +1,22 @@
-var ruleList = new RuleList();
-var blockRules = ruleList.export();
-blocked = {};
-
-// 如果一条规则为空, chrome会阻挡所有的连接, 我们需要将其改写为一个无法生效的规则
-if(!blockRules || blockRules == '') 
-    blockRules = ['http://j/k/i'];
+var blocked = {};
+var blockRules = [];
+applyRules();
+function applyRules(){
+    var ruleList = new RuleList();
+    blockRules = ruleList.export();
+    // 如果一条规则为空, chrome会阻挡所有的连接, 我们需要将其改写为一个无法生效的规则
+    if(!blockRules || blockRules == '') 
+        blockRules = ['http://j/k/i'];
+    var reqOpts = {
+        //urls中的元素格式有限制, 一旦有一个出错, 拦截插件整个就失效了
+        //可以在manifest.json中的permissions字段中检查一下, 更新插件时如果有错误会提示
+        urls: blockRules,
+        types: ["main_frame", "sub_frame", "stylesheet", "script", "image", "object", "xmlhttprequest"]
+    };
+    // 监听发送请求
+    chrome.webRequest.onBeforeRequest.removeListener(reqProc);
+    chrome.webRequest.onBeforeRequest.addListener(reqProc, reqOpts, ["blocking"]);
+}
 
 /*
     监听来自content_scripts消息, 被动
@@ -18,8 +30,6 @@ chrome.runtime.onMessage.addListener(requestHandler);
     sendReponse: ...也是回调函数, 跟content_scripts中的sendMessage()一样, 直接发送消息对象
 */
 function requestHandler(request, sender, sendResponse){
-    console.log(request);
-    console.log(sender);
     if(request.type == 'getBlocked'){
         console.dir(blocked);
         sendResponse({
@@ -43,37 +53,15 @@ function getBlockedList(tabId){
     return blocked[tabId];
 }
 
+function reqProc(request){
+    if (!blocked[request.tabId]){
+        blocked[request.tabId] = new Set();
+    }
+    blocked[request.tabId].add(request.url);
+    //注意这里返回的是一个对象
+    return {cancel: true};
+}
 
-
-
-
-
-// 监听发送请求
-chrome.webRequest.onBeforeRequest.addListener(
-    function(request) {
-        // console.dir(request);
-        if (!blocked[request.tabId]){
-            blocked[request.tabId] = new Set();
-        }
-        blocked[request.tabId].add(request.url);
-        //返回的是一个对象
-        return {cancel: true};
-    },{
-        //urls中的元素格式有限制, 一旦有一个出错, 拦截插件整个就失效了
-        //可以在manifest.json中的permissions字段中检查一下, 更新插件时如果有错误会提示
-        urls: blockRules,
-        types: [
-            "main_frame", 
-            "sub_frame", 
-            "stylesheet", 
-            "script", 
-            "image", 
-            "object", 
-            "xmlhttprequest"
-        ]
-    },
-    ["blocking"]
-);
 
 chrome.tabs.onActivated.addListener(onTabActivated);
 chrome.tabs.onUpdated.addListener(onTabUpdated);
@@ -86,18 +74,13 @@ function onTabActivated(activeInfo){
         updateBadge(tab);
     });
 }
+
 function onTabUpdated(tabId, changeInfo, tab){
     if(changeInfo.status != "loading") return;
     updateBadge(tab);
 }
 
 function updateBadge(tab){
-    // chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-    //     console.log(tabs);
-    //     console.log(tab);
-    //     if(!tabs[0]) return;
-    //     if(tabs[0].id != tab.id) return;
-    // });
     chrome.browserAction.setBadgeBackgroundColor({color: '#000'});
     var interval = setInterval(function(){
         if(blocked[tab.id]){
