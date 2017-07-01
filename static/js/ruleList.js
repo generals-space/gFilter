@@ -2,7 +2,16 @@
 function RuleList(){
     self = this;
     self.ruleTable = $('#ruleTable');
-    self._ruleList = [];
+    /*
+        self._ruleList的成员是对象类型
+        {
+            schema:
+            url:
+            uri:
+            status:
+        }
+    */ 
+    self._ruleList = []; 
     // 监听器: 删除表格当前行所表示的规则
     self.ruleTable.on('click', '.btnDelRule', function(){
         $(this).parents('.ruleInRow').remove();
@@ -31,7 +40,7 @@ function RuleList(){
         $(this).find('.btn-handle-group').addClass('invisible');
     });
     /*
-        @function: 将从html的规则列表取出来的字典对象, 
+        @function: 将从html的表格取出来的规则字典对象, 
             转换成有效的字符串类型变量(主要是指把select标签中的value转换成字符串)
         @return: 目标规则的字符串对象
     */
@@ -85,7 +94,7 @@ function RuleList(){
     };
 
     /*
-        @function: 从DOM文档中得到规则列表对象并返回
+        @function: 从当前DOM文档中得到规则列表对象并返回
     */
     self.parse = function(){
         var ruleInRows   = self.ruleTable.find('.ruleInRow');
@@ -127,7 +136,6 @@ function RuleList(){
             所以将空行渲染到DOM中是可行的, 但是空行不应该被保存.
     */
     self.add = function(){
-        self.ruleTable.find('tbody').append(plainHtml);
         var renderData = {
             ruleList: ''
         };
@@ -153,9 +161,9 @@ function RuleList(){
     */
     self.save = function(){
         var bgField = chrome.extension.getBackgroundPage();
-        tmpRuleList = JSON.stringify(self.parse());
-        localStorage.ruleList = tmpRuleList;
-        self._ruleList = tmpRuleList;
+        self._ruleList = self.parse()
+        localStorage.ruleList = JSON.stringify(self._ruleList);
+        // backgroud域中拦截规则即时生效
         bgField.applyRules();
     };
 
