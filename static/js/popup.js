@@ -19,6 +19,7 @@
                 renderData.blockedListLen = 0;
             }else{
                 renderData.blockedListLen = blockedList.size;
+                // 不能用for语句吗? forEach应该也是js内置语句吧
                 blockedList.forEach(function(item) {
                     console.log(item);
                     renderData.blockedList.push(item);

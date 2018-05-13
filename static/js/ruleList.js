@@ -13,18 +13,18 @@ function RuleList(){
     */ 
     self._ruleList = []; 
     // 监听器: 删除表格当前行所表示的规则
-    self.ruleTable.on('click', '.btnDelRule', function(){
+    self.ruleTable.on('click', '.btnDelRule', function(event){
         $(this).parents('.ruleInRow').remove();
     });
     // 监听器: 拷贝表格当前行所表示的规则(有效字符串类型)
-    self.ruleTable.on('click', '.btnCpRule', function(){
+    self.ruleTable.on('click', '.btnCpRule', function(event){
         var currRow = $(this).parents('.ruleInRow');
         var currRuleObj = self.getCurrRule(currRow);
         currRule = self.convertToStr(currRuleObj);
         addToClipboard(currRule);
         $(this).tooltip('show');
     });
-    self.ruleTable.on('hidden.bs.tooltip', '.btnCpRule', function(){
+    self.ruleTable.on('hidden.bs.tooltip', '.btnCpRule', function(event){
         /* 
             这里控制台会报错, 但是没办法, 如果不加这个事件, 
             tooltip通过点击'复制'按钮触发一次后, 下次只要鼠标悬停就会再次触发.
@@ -35,8 +35,7 @@ function RuleList(){
     });
     self.ruleTable.on('mouseenter', '.ruleInRow', function(event){
         $(this).find('.btn-handle-group').removeClass('invisible');
-    });
-    self.ruleTable.on('mouseleave', '.ruleInRow', function(event){
+    }).on('mouseleave', '.ruleInRow', function(event){
         $(this).find('.btn-handle-group').addClass('invisible');
     });
     /*
@@ -71,11 +70,11 @@ function RuleList(){
             ruleStr = '';
         return ruleStr;
     }
-    /*
-        @function: 从localStorage中取出ruleList字符串, 
-            并将其赋值给self._ruleList成员对象.
-    */
-    self.load = function(){
+    self.init = function(){
+        /*
+        *  @function: 从localStorage中取出ruleList字符串, 
+        *     并将其赋值给self._ruleList成员对象.
+        */
         ruleList = localStorage.ruleList;
         if(ruleList) {
             ruleList = JSON.parse(ruleList)
@@ -84,8 +83,10 @@ function RuleList(){
         }
         self._ruleList = ruleList;
     };
-    // 将self._ruleList的内容渲染到DOM文档中.
     self.render = function(){
+        /*
+         * function: 将self._ruleList的内容渲染到table元素中.
+         */
         var renderData = {
             ruleList: self._ruleList
         };
@@ -100,7 +101,8 @@ function RuleList(){
         var ruleInRows   = self.ruleTable.find('.ruleInRow');
         tmpRuleList = [];
         // 不只jq对象可以使用each方法, 普通数组对象也可以
-        ruleInRows.each(function(){
+        ruleInRows.each(function(index){
+            // 在each的回调函数中, index指代数组索引, 而this则表示一个find找到的某一元素
             var ruleItem = {
                 'schema'    : $(this).find('.ruleSchema').val(),
                 'url'       : $(this).find('.ruleUrl').val(),
@@ -208,8 +210,8 @@ function RuleList(){
         }
         self._ruleList = tmpRuleList;
     }
-
+    // 实例化时的构造函数自动执行...
     // 这种构造方式需要前向声明...
     // 但是成员方法间的相互调用不需要...
-    self.load();
+    self.init();
 }
